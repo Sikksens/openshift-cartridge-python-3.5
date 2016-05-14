@@ -84,11 +84,18 @@ else
 	client_result "Python $ver already installed."
 fi
 
-#if ! is_virt_installed; then
-#	create_virt
-#else
-#	client_result "Virtual environment already installed."
-#fi
+# Uncommented from original repo
+if ! is_virt_installed; then
+	create_virt
+else
+	client_result "Virtual environment already installed."
+fi
+
+# Create action_hook
+echo 'source $OPENSHIFT_PYTHON_VENV_DIR/bin/activate' >> $OPENSHIFT_REPO_DIR/.openshift/action_hooks/start
+echo 'pip3 install -r $OPENSHIFT_REPO_DIR/requirements.txt' >> $OPENSHIFT_REPO_DIR/.openshift/action_hooks/start
+echo 'python $OPENSHIFT_REPO_DIR/app.py &' >> $OPENSHIFT_REPO_DIR/.openshift/action_hooks/start
+echo 'pkill python' >> $OPENSHIFT_REPO_DIR/.openshift/action_hooks/stop
 
 # Clean up temp directory
 rm -rf $tdir/python-$ver
