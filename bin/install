@@ -94,7 +94,7 @@ fi
 # Create action_hook
 echo 'source $OPENSHIFT_PYTHON_VENV_DIR/bin/activate' >> $OPENSHIFT_REPO_DIR/.openshift/action_hooks/start
 echo 'pip3 install -r $OPENSHIFT_REPO_DIR/requirements.txt' >> $OPENSHIFT_REPO_DIR/.openshift/action_hooks/start
-echo 'python $OPENSHIFT_REPO_DIR/app.py &' >> $OPENSHIFT_REPO_DIR/.openshift/action_hooks/start
+echo 'python3.5 $OPENSHIFT_REPO_DIR/app.py &' >> $OPENSHIFT_REPO_DIR/.openshift/action_hooks/start
 echo 'pkill python' >> $OPENSHIFT_REPO_DIR/.openshift/action_hooks/stop
 
 # Clean up temp directory
